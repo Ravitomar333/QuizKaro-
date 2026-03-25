@@ -26,10 +26,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Session
+app.set("trust proxy", 1);
 app.use(session({
   secret: "secretkey",
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false,
+  cookie: {
+    secure: false   
+  }
 }));
 
 // Flash
