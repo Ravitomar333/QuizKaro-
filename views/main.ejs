@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style3.css">
+    <title>Document</title>
+</head>
+<body>
+     <nav class="navbar">
+  <div class="nav-left">
+    <h2>QuizKaro</h2>
+  </div>
+
+  <div class="nav-right">
+   
+    <a href="/about">About</a>
+     
+    <a href="/logout" class="logout-btn">Logout</a>
+  </div>
+</nav>
+
+
+   
+
+<div class="container">
+
+  <h2>Available Quizzes</h2>
+
+  <div class="quiz-container">
+
+    <% if (quizzes && quizzes.length > 0) { %>
+
+      <% quizzes.forEach(q => { %>
+
+        <div class="quiz-card">
+
+          <h3><%= q.subject %></h3>
+
+          <p>📊 Questions: <%= q.questions.length %></p>
+          <p>⏱ Time: <%= q.totalTime %> min</p>
+
+          <a href="/quiz/<%= q._id %>" class="start-btn">Start Quiz</a>
+
+        </div>
+
+      <% }) %>
+
+    <% } else { %>
+
+      <div class="no-quiz">
+        <p>No quizzes available</p>
+      </div>
+
+    <% } %>
+
+  </div>
+
+</div>
+<br><br><br>
+      
+      <%- include('partials/footer') %>
+    
+</body>
+</html>

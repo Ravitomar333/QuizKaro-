@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="/css/style3.css">
+    <title>Admin</title>
+</head>
+<body>
+     <nav class="navbar">
+  <div class="nav-left">
+    <h2>QuizKaro</h2>
+  </div>
+
+  <div class="nav-right">
+    <a href="/admin">Dashboard</a>
+    <a href="/create-quiz">Create Quiz</a>
+   
+    <a href="/logout" class="logout-btn">Logout</a>
+  </div>
+</nav>
+
+<div class="container">
+    <h2><%= quiz.subject %></h2>
+
+    <% quiz.questions.forEach((q, index) => { %>
+        <div class="card">
+            <h4>Q<%= index+1 %>: <%= q.question %></h4>
+
+            <% q.options.forEach((opt, i) => { %>
+                <p>
+                    <%= opt %>
+                    <% if(i === q.correctAnswer){ %> ✅ <% } %>
+                </p>
+            <% }) %>
+        </div>
+    <% }) %>
+</div>
+
+  
+     <%- include('partials/footer2') %>
+</body>
+</html>

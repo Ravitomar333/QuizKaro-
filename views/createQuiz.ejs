@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="/css/style3.css">
+    <title>Admin</title>
+</head>
+<body>
+     <nav class="navbar">
+  <div class="nav-left">
+    <h2>QuizKaro</h2>
+  </div>
+
+  <div class="nav-right">
+    <a href="/admin">Dashboard</a>
+    <a href="/create-quiz">Create Quiz</a>
+   
+    <a href="/logout" class="logout-btn">Logout</a>
+  </div>
+</nav>
+
+<div class="container">
+    <h1>Create New Quiz</h1>
+
+    <form action="/admin/create-quiz" method="POST" class="form-card">
+        
+        <label>Subject Name</label>
+        <input type="text" name="subject" placeholder="Enter subject (Java, DBMS...)" required>
+
+        <label>Total Questions</label>
+        <input type="number" name="totalQuestions" min="1" required>
+
+        <label>Total Time (in minutes)</label>
+        <input type="number" name="totalTime" min="1" required>
+<div class="center-btn">
+        <button class="btn-success" type="submit">Create Quiz →</button>
+        </div>
+    </form>
+</div>
+
+   
+     <%- include('partials/footer2') %>
+
+
+     <script>
+  setTimeout(() => {
+    const messages = document.querySelectorAll('.flash-msg');
+    messages.forEach(msg => {
+      msg.style.display = 'none';
+    });
+  }, 3000); 
+</script>
+</body>
+</html>

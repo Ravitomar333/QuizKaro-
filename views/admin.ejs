@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="/css/style3.css">
+    <title>Admin</title>
+</head>
+<body>
+     <nav class="navbar">
+  <div class="nav-left">
+    <h2>QuizKaro</h2>
+  </div>
+ 
+
+  <div class="nav-right">
+    <a href="/admin/create-quiz" class="btn">Create Quiz</a>
+    <a href="/admin/results" class="btn">View Results</a>
+    <a href="/logout" class="logout-btn">Logout</a>
+  </div>
+</nav>
+
+ <% if (success_msg && success_msg.length > 0) { %>
+  <div class="flash-msg flash-success">
+    <%= success_msg[0] %>
+  </div>
+<% } %>
+
+
+<div class="container">
+
+  <h1>Admin Dashboard</h1>
+
+ 
+
+  <div class="quiz-container">
+
+    <% quizzes.forEach(quiz => { %>
+
+      <div class="quiz-card">
+
+        <h3><%= quiz.subject %></h3>
+
+        <p>📊 <%= quiz.questions.length %> / <%= quiz.totalQuestions %> Questions</p>
+        <p>⏱ <%= quiz.totalTime %> min</p>
+
+        <!-- Buttons -->
+        <a href="/admin/quiz/<%= quiz._id %>" class="btn view">View</a>
+        &nbsp;&nbsp;
+
+        <a href="/admin/edit-quiz/<%= quiz._id %>" class="btn edit">Edit</a>
+        <br><br>
+
+        <form action="/admin/delete-quiz/<%= quiz._id %>" method="POST">
+          <button class="btn delete">Delete</button>
+        </form>
+
+      </div>
+
+    <% }) %>
+
+  </div>
+
+</div>
+<br><br><br>
+   
+     <%- include('partials/footer2') %>
+    <script>
+
+  setTimeout(() => {
+    document.querySelectorAll('.flash-msg').forEach(e => e.remove());
+  }, 3000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>About - QuizKaro</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #333;
+        }
+
+        .about-section {
+            max-width: 900px;
+            margin: 80px auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .about-section h1 {
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .about-section p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #5a67d8;
+        }
+    </style>
+</head>
+<body>
+
+    <%- include('partials/navbar') %>
+
+
+    <div class="about-section">
+        <h1>About QuizKaro</h1>
+
+        <p>
+            Welcome to <span class="highlight">QuizKaro</span>, an interactive platform designed to make learning fun and engaging.
+        </p>
+
+        <p>
+            Our goal is to help users test their knowledge, improve skills, and grow through quizzes across different categories.
+        </p>
+
+        <p>
+            This platform is built using modern web technologies to provide a fast, responsive, and user-friendly experience.
+        </p>
+
+        <p>
+            Whether you are preparing for exams or just love quizzes, QuizKaro is the perfect place to learn and challenge yourself.
+        </p>
+
+        <!-- <a href="/login" class="btn">Get Started</a> -->
+         <% if (user) { %>
+    <a href="/main">
+        <button class="btn">Get Started</button>
+    </a>
+<% } else { %>
+    <a href="/login">
+        <button class="btn">Get Started</button>
+    </a>
+<% } %>
+    </div>
+
+
+    <%- include('partials/footer2') %>
+</body>
+</html>

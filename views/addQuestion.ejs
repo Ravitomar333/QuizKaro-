@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Questions</title>
+     <link rel="stylesheet" href="/css/style3.css">
+</head>
+<body>
+
+ <nav class="navbar">
+  <div class="nav-left">
+    <h2>QuizKaro</h2>
+  </div>
+
+  <div class="nav-right">
+     <a href="/admin">Dashboard</a>
+    <a href="/create-quiz">Create Quiz</a>
+   
+    <a href="/logout" class="logout-btn">Logout</a>
+  </div>
+</nav>
+<% if (success_msg && success_msg.length > 0) { %>
+  <div class="flash-msg flash-success">
+    <%= success_msg[0] %>
+  </div>
+<% } %>
+
+
+<div class="container">
+
+    <h1>Add Questions</h1>
+
+    <!-- Quiz Info (Subject shown once) -->
+    <div class="quiz-info">
+        <h3>📘 Subject: <%= quiz.subject %></h3>
+        <p>Progress: <%= quiz.questions.length %> / <%= quiz.totalQuestions %></p>
+
+        <progress value="<%= quiz.questions.length %>" max="<%= quiz.totalQuestions %>"></progress>
+    </div>
+
+    <!-- ONLY QUESTION FORM -->
+    <form action="/admin/add-question" method="POST" class="form-card">
+
+        <label>Question</label>
+        <textarea name="question" placeholder="Enter question..." required></textarea>
+
+        <label>Option 1</label>
+        <input type="text" name="option1" required>
+
+        <label>Option 2</label>
+        <input type="text" name="option2" required>
+
+        <label>Option 3</label>
+        <input type="text" name="option3" required>
+
+        <label>Option 4</label>
+        <input type="text" name="option4" required>
+
+        <label>Correct Answer</label>
+        <select name="correctAnswer" required>
+            <option value="">Select correct option</option>
+            <option value="0">Option 1</option>
+            <option value="1">Option 2</option>
+            <option value="2">Option 3</option>
+            <option value="3">Option 4</option>
+        </select>
+           <div class="center-btn">
+        <button  class="btn-success" type="submit">Add Question ➕</button>
+
+        </div>
+    </form>
+
+    <!-- Success Message -->
+    <% if (quiz.questions.length === quiz.totalQuestions) { %>
+        <div class="success">
+            🎉 Quiz Completed Successfully!
+        </div>
+    <% } %>
+
+</div>
+
+<%- include('partials/footer2') %>
+
+
+<script>
+    document.querySelector("form").reset();
+    setTimeout(() => {
+    document.querySelectorAll('.flash-msg').forEach(e => e.remove());
+  }, 3000);
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style4.css">
+    <title>Quiz</title>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-left">
+    <h2>QuizKaro</h2>
+  </div>
+
+  <div class="nav-right">
+    <a href="/home">Home</a> 
+    <a href="/about">About</a>
+    <a href="/logout" class="logout-btn">Logout</a>
+  </div>
+</nav>
+
+<div class="container">
+    <h2><%= quiz.subject %> Quiz</h2>
+    <h2>⏰ Time Left: <span id="timer"></span></h2>
+
+    <form id="quizForm" action="/quiz/<%= quiz._id %>" method="POST">
+
+        <% quiz.questions.forEach((q, i) => { %>
+
+            <!-- ✅ Each question hidden except active -->
+            <div class="quiz-card question" id="q<%= i %>" style="display:none;">
+                <p><b>Q<%= i+1 %>:</b> <%= q.question %></p>
+
+                <% q.options.forEach((opt, j) => { %>
+                    <label>
+                        <input type="radio" name="q<%= i %>" value="<%= j %>">
+                        <%= opt %>
+                    </label><br>
+                <% }) %>
+            </div>
+
+        <% }) %>
+
+        <!-- ✅ Navigation Buttons -->
+        <div style="margin-top:20px;">
+            <button type="button" onclick="prevQuestion()" id="prevBtn">⬅ Prev</button>
+            <button type="button" onclick="nextQuestion()" id="nextBtn">Next ➡</button>
+        </div>
+
+        <br>
+
+        <!-- ✅ Submit -->
+        <button class="start-btn">Submit Quiz</button>
+
+    </form>
+</div>
+
+<%- include('partials/footer') %>
+
+<script>
+    window.quizTime = <%= quiz.totalTime %>;
+</script>
+<script src="/js/Quiz.js"></script>
+
+</body>
+</html>

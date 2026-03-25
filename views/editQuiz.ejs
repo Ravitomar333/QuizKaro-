@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="/css/style3.css">
+    <title>Admin</title>
+</head>
+<body>
+     <nav class="navbar">
+  <div class="nav-left">
+    <h2>QuizKaro</h2>
+  </div>
+
+  <div class="nav-right">
+    <a href="/admin">Dashboard</a>
+    <a href="/create-quiz">Create Quiz</a>
+   
+    <a href="/logout" class="logout-btn">Logout</a>
+  </div>
+</nav>
+
+<div class="container">
+    <h2>Edit Quiz</h2>
+
+    <% quiz.questions.forEach((q, index) => { %>
+        <form action="/admin/edit-question/<%= quiz._id %>/<%= index %>" method="POST" class="card">
+
+            <input type="text" name="question" value="<%= q.question %>" required>
+
+            <% q.options.forEach((opt, i) => { %>
+                <input type="text" name="option<%= i+1 %>" value="<%= opt %>" required>
+            <% }) %>
+
+            <select name="correctAnswer">
+                <option value="0" <%= q.correctAnswer==0?'selected':'' %>>Option 1</option>
+                <option value="1" <%= q.correctAnswer==1?'selected':'' %>>Option 2</option>
+                <option value="2" <%= q.correctAnswer==2?'selected':'' %>>Option 3</option>
+                <option value="3" <%= q.correctAnswer==3?'selected':'' %>>Option 4</option>
+            </select>
+<br><br>
+            <button id="update-btn">Update</button>
+        </form>
+        <br>
+    <% }) %>
+</div>
+
+          <div class="center-btn">
+        <button class="btn-success"  type="submit"> <a href="/admin">Back to Dashboard -></a> </button>
+        </div>
+        <br><br>
+
+
+ 
+     <%- include('partials/footer2') %>
+</body>
+</html>

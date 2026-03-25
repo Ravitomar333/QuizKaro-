@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style3.css">
+    <title>Document</title>
+</head>
+<body>
+     <nav class="navbar">
+  <div class="nav-left">
+    <h2>QuizKaro</h2>
+  </div>
+
+  <div class="nav-right">
+    
+    <a href="/about">About</a>
+    <a href="/logout" class="logout-btn">Logout</a>
+  </div>
+</nav>
+
+<div class="result-wrapper">
+
+    <div class="result-card">
+        <h2>Your Score</h2>
+        <h1><%= score %> / <%= total %></h1>
+
+        <a href="/main" class="back-btn">Go to Dashboard</a>
+    </div>
+
+</div>
+
+
+
+
+   <%- include('partials/footer') %>
+    
+</body>
+</html>

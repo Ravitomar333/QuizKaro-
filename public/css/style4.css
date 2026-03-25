@@ -1,0 +1,219 @@
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+
+  background-color: #333;
+  color: white;
+
+  padding: 10px 30px;
+}
+
+h2 {
+    text-align: center;
+}
+
+/* Left side */
+.nav-left h2 {
+  margin: 0;
+}
+
+/* Right side links */
+.nav-right a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 16px;
+}
+
+/* Hover effect */
+.nav-right a:hover {
+  text-decoration: underline;
+}
+
+/* Logout button style */
+.logout-btn {
+  background-color: red;
+  padding: 6px 12px;
+  border-radius: 5px;
+}
+
+.logout-btn:hover {
+  background-color: darkred;
+}
+
+/* Container */
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+/* Timer */
+#timer {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Question Card */
+.quiz-card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    text-align: left;
+    transition: 0.3s;
+}
+
+/* Question text */
+.quiz-card p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* Options */
+.quiz-card label {
+    display: block;
+    background: #f5f5f5;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.quiz-card label:hover {
+    background: #e0e0e0;
+}
+
+/* Radio button spacing */
+.quiz-card input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Navigation Buttons Container */
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+/* Common Button Style */
+.nav-buttons button {
+    padding: 10px 22px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+/* PREV Button */
+#prevBtn {
+    background: #f44336;
+    color: white;
+}
+
+#prevBtn:hover {
+    background: #d32f2f;
+    transform: translateY(-2px);
+}
+
+/* NEXT Button */
+#nextBtn {
+    background: #4CAF50;
+    color: white;
+}
+
+#nextBtn:hover {
+    background: #388e3c;
+    transform: translateY(-2px);
+}
+
+/* Disabled Buttons */
+.nav-buttons button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Click Effect */
+.nav-buttons button:active {
+    transform: scale(0.95);
+}
+
+/* Submit Button */
+.start-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.start-btn:hover {
+    background: #1976d2;
+}
+
+
+
+/* ✅ RESPONSIVE */
+@media (max-width: 768px) {
+
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    text-align: center;
+  }
+
+  .nav-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .container {
+    width: 95%;
+    margin: 20px auto;
+  }
+
+  .quiz-card {
+    padding: 15px;
+  }
+
+  .quiz-card p {
+    font-size: 16px;
+  }
+
+  .quiz-card label {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  #timer {
+    font-size: 16px;
+  }
+
+  .nav-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-buttons button {
+    width: 100%;
+  }
+
+  .start-btn {
+    width: 100%;
+  }
+}
