@@ -12,12 +12,12 @@ const Quiz = require("./models/Quiz");
 const Result = require("./models/Result");
 require("dotenv").config();
 
-// ================= DB =================
+//  DB 
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
-// ================= MIDDLEWARE =================
+//  MIDDLEWARE 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -45,7 +45,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// ================= CUSTOM MIDDLEWARE =================
+//  CUSTOM MIDDLEWARE 
 function isAdmin(req, res, next) {
   if (req.session.user && req.session.user.role === "admin") {
     next();
@@ -67,7 +67,10 @@ app.use((req, res, next) => {
     next();
 });
 
-// ================= ROUTES =================
+
+
+
+// ROUTES
 
 
 
@@ -121,6 +124,7 @@ app.post("/register", async (req, res) => {
 });
 
 // LOGIN
+
 app.get("/login", (req, res) => {
   res.render("login");
 });
@@ -162,17 +166,20 @@ app.post("/login", async (req, res) => {
 });
 
 // USER MAIN PAGE
+
 app.get("/main", async (req, res) => {
   if (!req.session.user) return res.redirect("/login");
 
-  const quizzes = await Quiz.find({ isCompleted: true });
+  const quizzes = await Quiz.find({
+      isCompleted: true,
+      isActive: true
+  });
 
   res.render("main", {
-    user: req.session.user,
-    quizzes
+      user: req.session.user,
+      quizzes
   });
 });
-
 //  ADMIN 
 
 app.get("/admin", isAdmin, async (req, res) => {
@@ -187,12 +194,14 @@ app.get("/admin/create-quiz", isAdmin, (req, res) => {
 app.post("/admin/create-quiz", isAdmin, async (req, res) => {
   const { subject, totalQuestions, totalTime } = req.body;
 
+
   const quiz = new Quiz({
     subject,
     totalQuestions,
     totalTime,
-    questions: []
-  });
+    questions: [],
+    isActive: false
+});
 
   await quiz.save();
   req.session.currentQuizId = quiz._id;
@@ -279,9 +288,16 @@ app.post("/admin/edit-question/:quizId/:qIndex", isAdmin, async (req, res) => {
 app.get("/quiz/:id", async (req, res) => {
   if (!req.session.user) return res.redirect("/login");
 
-  const quiz = await Quiz.findById(req.params.id);
+  const quiz = await Quiz.findOne({
+    _id: req.params.id,
+    isActive: true
+  });
+   if (!quiz) {
+    return res.send("Quiz not available");
+  }
   res.render("startQuiz", { quiz });
 });
+
 
 // SUBMIT QUIZ
 app.post("/quiz/:id", async (req, res) => {
@@ -329,6 +345,26 @@ app.get("/logout", blockLogoutIfQuizIncomplete, (req, res) => {
   res.redirect("/login");
 });
 
+
+//QUIZ ACTIVATE
+
+app.get("/admin/quiz/activate/:id", isAdmin, async (req, res) => {
+    await Quiz.findByIdAndUpdate(req.params.id, {
+        isActive: true
+    });
+
+    req.flash("success_msg", "Quiz Activated Successfully");
+    res.redirect("/admin");
+});
+
+app.get("/admin/quiz/deactivate/:id", isAdmin, async (req, res) => {
+    await Quiz.findByIdAndUpdate(req.params.id, {
+        isActive: false
+    });
+
+    req.flash("success_msg", "Quiz Deactivated Successfully");
+    res.redirect("/admin");
+});
 
 
 //  SERVER 

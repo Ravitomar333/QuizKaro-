@@ -55,6 +55,17 @@
           <button class="btn delete">Delete</button>
         </form>
 
+        <% if(quiz.isActive){ %>
+    <a href="/admin/quiz/deactivate/<%= quiz._id %>">
+        Deactivate
+    </a>
+<% } else { %>
+    <a href="/admin/quiz/activate/<%= quiz._id %>">
+        Activate
+    </a>
+<% } %>
+        
+
       </div>
 
     <% }) %>

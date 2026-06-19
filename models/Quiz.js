@@ -17,7 +17,11 @@ const quizSchema = new mongoose.Schema({
     isCompleted: {
         type: Boolean,
         default: false
-    }
+},
+    isActive: {
+    type: Boolean,
+    default: false
+}
 });
 
 module.exports = mongoose.model("Quiz", quizSchema);
